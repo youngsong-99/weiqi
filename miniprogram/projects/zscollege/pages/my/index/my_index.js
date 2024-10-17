@@ -42,7 +42,6 @@ Page({
     let res = PassportBiz.loginSilenceMustV2(this); 
     console.log(res)
     if(res) {
-      console.log(111111)
       this._loadUser();
     }
 	},
