@@ -8,8 +8,8 @@
 	</view>
 	
 	<view class="form-group">
-		<view class="title must">昵称</view>
-		<input type="nickname" placeholder="填写您的昵称" placeholder-class="phc" model:value="{{formName}}" maxlength="30"></input>
+		<view class="title must">姓名</view>
+		<input type="nickname" placeholder="填写您的姓名" placeholder-class="phc" model:value="{{formName}}" maxlength="30"></input>
 	</view>
 	<view wx:if="{{formNameFocus}}" class="hint-desc error">{{formNameFocus}}</view>
 
@@ -24,9 +24,23 @@
 	</view>
 	<view wx:if="{{formMobileFocus}}" class="hint-desc error">{{formMobileFocus}}</view>
 
+	<view class="form-group">
+		<view class="title must">微信</view>
+		<input type="text" placeholder="填写您的微信号" placeholder-class="phc" model:value="{{formWechat}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formWechatFocus}}" class="hint-desc error">{{formWechatFocus}}</view>
+
+  <view class="form-group">
+		<view class="title must">邮箱</view>
+		<input type="text" placeholder="填写您的邮箱" placeholder-class="phc" model:value="{{formEmail}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formEmailFocus}}" class="hint-desc error">{{formEmailFocus}}</view>
+
 </view>
 
 <view class="form-box shadow-project card-project margin-top-xs">
 	<cmpt-form-show id="cmpt-form" mark="cmpt-form" isCacheMatch="{{false}}" fields="{{fields}}" forms="{{formForms}}" isDefMatch="{{isEdit?false:true}}">
 	</cmpt-form-show>
 </view>
+
+

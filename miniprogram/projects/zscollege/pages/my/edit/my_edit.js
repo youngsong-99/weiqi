@@ -99,6 +99,7 @@ Page({
 
 	bindSubmitTap: async function (e) {
 		try {
+
 			let data = this.data; 
 			// 数据校验 
 			data = validate.check(data, PassportBiz.CHECK_FORM, this);

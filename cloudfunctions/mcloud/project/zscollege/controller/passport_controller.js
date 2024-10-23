@@ -35,7 +35,8 @@ class PassportController extends BaseProjectController {
 
 	/** 注册 */
 	async register() {
-		// 数据校验
+    // 数据校验
+
 		let rules = {
 			name: 'must|string|min:1|max:30|name=昵称',
 			mobile: 'must|mobile|name=手机',

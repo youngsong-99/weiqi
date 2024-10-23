@@ -3,5 +3,52 @@
 
 <view wx:if="{{isLoad}}" class="main padding-project">
 	<include src="../edit/user_form.wxml" /> 
+  <view class="form-box shadow-project card-project">
+  <view class="form-group">
+		<view class="title must">意愿部门</view>
+	</view>
+  <view class="form-group">
+    <view class="page-section page-section-gap">
+      <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="id">
+            <view class="weui-cell__hd">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+              <label>{{item.name}}</label>
+            </view>
+
+          </label>
+        </checkbox-group>
+    </view>
+  </view>
+
+  <view class="form-group">
+		<view class="title must">拟加入协会及意愿部门的原因</view>
+  </view>
+  <view class="form-group">
+		<textarea placeholder="加入部门原因" model:value="{{formReason}}" maxlength="500"></textarea>
+	</view>
+	<view wx:if="{{formReasonFocus}}" class="hint-desc error">{{formReasonFocus}}</view>
+
+  <view class="form-group">
+		<view class="title must">可提供的资源</view>
+  </view>
+  <view class="form-group">
+		<textarea placeholder="你有哪些特长/资源，愿意帮助协会发展" model:value="{{formResource}}" maxlength="500"></textarea>
+	</view>
+	<view wx:if="{{formResourceFocus}}" class="hint-desc error">{{formResourceFocus}}</view>
+
+  <view class="form-group">
+		<view class="title must">是否接受调剂</view>
+      <radio-group bindchange="radioChange">
+        <label class="radio">
+          <radio value="assign"/>  是
+        </label>
+        <label class="radio">
+          <radio value="notAssign"/>  否
+        </label>
+      </radio-group>
+	</view>
+
+</view>
 	<button bindtap="bindSubmitTap" class="btn-base btn-project shadow">提交注册</button>
 </view>
