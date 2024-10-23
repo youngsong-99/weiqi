@@ -305,6 +305,7 @@
 
 
  function check(data, rules, that) {
+
  	let returnData = {};
  	for (let key in rules) {
  		let arr = rules[key].split('|');

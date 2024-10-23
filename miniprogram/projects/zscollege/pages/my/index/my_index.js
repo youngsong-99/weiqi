@@ -40,7 +40,7 @@ Page({
 	onShow: async function () {  
     // PassportBiz.loginSilenceMust(this); 
     let res = PassportBiz.loginSilenceMustV2(this); 
-    console.log(res)
+
     if(res) {
       this._loadUser();
     }
@@ -61,12 +61,10 @@ Page({
 	},
 
 	_loadUser: async function (e) {
-    console.log(this)
 		let opts = {
 			title: 'bar'
 		}
     let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
-    console.log(user)
 		if (!user) {
 			this.setData({
 				user: null

@@ -16,6 +16,7 @@ class PublicBiz extends BaseBiz {
 	 * @param {*} that  
 	 */
 	static initPageBase(that, { skin, isSetNavColor = true }) {
+
 		if (skin) {
 			skin.IS_SUB = setting.IS_SUB;
 

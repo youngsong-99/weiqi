@@ -13,7 +13,17 @@ Page({
 	 */
 	data: {
 		isLoad: false,
-		isEdit: false,
+    isEdit: false,
+
+    items: [
+      {value: 'OPT', name: 'OPT运营中心'},
+      {value: 'FRC', name: 'FRC研究中心'},
+      {value: 'FPC', name: 'FPC项目中心'},
+      {value: '未来梦想家', name: '未来梦想家俱乐部'},
+      {value: '科技金融俱乐部', name: '科技金融俱乐部'},
+      {value: '对话企业家', name: '对话企业家项目组'},
+      {value: '协会顾问', name: '协会顾问'},
+    ],
 
 		mobileCheck: setting.MOBILE_CHECK
 	},
@@ -22,6 +32,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
+
 		ProjectBiz.initPage(this);
 
 		if (options && options.retUrl)
@@ -33,19 +44,22 @@ Page({
 	_loadDetail: async function (e) { 
 		let opts = {
 			title: 'bar'
-		}
-		let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
-		if (user) {
-			return wx.redirectTo({ url: '../index/my_index' });
-		}
+    }
+
+    let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
+
+		// if (user) {
+		// 	return wx.redirectTo({ url: '../index/my_index' });
+		// }
 
 		this.setData({
 			isLoad: true,
 
 			fields: projectSetting.USER_FIELDS,
 
-			formName: '',
-			formMobile: '',
+      formName: '',
+      formMobile: '',
+      formResource: '',
 			formForms: []
 		});
 	},
@@ -99,7 +113,7 @@ Page({
 	bindSubmitTap: async function (e) {
 		try {
 			let data = this.data;
-
+ 
 			// 数据校验 
 			data = validate.check(data, PassportBiz.CHECK_FORM, this);
 			if (!data) return;
@@ -108,14 +122,17 @@ Page({
 			if (!forms) return;
 			data.forms = forms;
 
-			data.status = projectSetting.USER_REG_CHECK ? 0 : 1;
-
+      data.status = projectSetting.USER_REG_CHECK ? 0 : 1;
+      data.acceptAssign = this.data.acceptAssign
+      data.wishList = this.data.wishList
+      console.log(this.data)
+      console.log(data)
 			let opts = {
 				title: '提交中'
 			}
 			await cloudHelper.callCloudSumbit('passport/register', data, opts).then(result => {
 				if (result && helper.isDefined(result.data.token) && result.data.token) {
-
+          console.log(123124312)
 					// 用户需要审核，不能登录
 					if (!projectSetting.USER_REG_CHECK) PassportBiz.setToken(result.data.token);
 
@@ -139,5 +156,37 @@ Page({
 		} catch (err) {
 			console.error(err);
 		}
-	}
+  },
+  
+  checkboxChange: function (e) {
+
+    const items = this.data.items
+    const values = e.detail.value
+    let wishList = []
+    for (let i = 0, lenI = items.length; i < lenI; ++i) {
+      items[i].checked = false
+
+      for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (items[i].value === values[j]) {
+          items[i].checked = true
+          wishList.push(items[i])
+          break
+        }
+      }
+    }
+    this.setData({
+      wishList
+    })
+  },
+
+  radioChange: function (e) {
+    let acceptAssign = false
+    if(e.detail.value == 'assign') {
+      acceptAssign = true
+    }
+    this.setData({
+      acceptAssign
+    })
+  }
+
 })
