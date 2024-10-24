@@ -33,7 +33,14 @@ UserModel.DB_STRUCTURE = {
 	USER_ADD_IP: 'string|false',
 
 	USER_EDIT_TIME: 'int|true',
-	USER_EDIT_IP: 'string|false',
+  USER_EDIT_IP: 'string|false',
+  
+  USER_WECHAT: 'string|false|comment=用户微信',
+  USER_EMAIL: 'string|false|comment=用户邮箱',
+  USER_REASON: 'string|false|comment=入会原因',
+  USER_RESOURCE: 'string|false|comment=可提供资源',
+  USER_WISHLIST: 'array|true|default=[]',
+  USER_ACCEPTASSIGN: 'bool|false',
 }
 
 // 字段前缀

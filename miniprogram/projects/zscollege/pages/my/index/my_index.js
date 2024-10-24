@@ -38,12 +38,12 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: async function () {  
-    // PassportBiz.loginSilenceMust(this); 
-    let res = PassportBiz.loginSilenceMustV2(this); 
+    PassportBiz.loginSilenceMust(this); 
+    // let res = PassportBiz.loginSilenceMustV2(this); 
 
-    if(res) {
-      this._loadUser();
-    }
+    // if(res) {
+    //   this._loadUser();
+    // }
 	},
 
 	/**
@@ -63,7 +63,10 @@ Page({
 	_loadUser: async function (e) {
 		let opts = {
 			title: 'bar'
-		}
+    }
+    let param = {
+      
+    }
     let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
 		if (!user) {
 			this.setData({

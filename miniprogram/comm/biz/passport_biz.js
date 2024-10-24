@@ -140,14 +140,13 @@ class PassportBiz extends BaseBiz {
 		let opt = {
 			title: title || '登录中',
 		};
-
+    
 		let res = await cloudHelper.callCloudSumbit('passport/login', {}, opt).then(result => {
       PassportBiz.clearToken();
 
 			if (result && helper.isDefined(result.data.token) && result.data.token && result.data.token.status == 1) {
-        console.log(result)
-				PassportBiz.setToken(result.data.token);
 
+				PassportBiz.setToken(result.data.token);
 				if (that) that.setData({
 					isLogin: true
 				});
@@ -271,6 +270,7 @@ class PassportBiz extends BaseBiz {
   // 新加部分
   static loginCheckV2(mustLogin = false, method = 'back', title = '', that = null) {
     let token = cacheHelper.get(constants.CACHE_TOKEN);
+    console.log(token)
     if (token != null) {
       if (that)
         that.setData({
