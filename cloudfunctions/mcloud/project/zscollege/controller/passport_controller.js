@@ -7,6 +7,7 @@
 const BaseProjectController = require('./base_project_controller.js');
 const PassportService = require('../service/passport_service.js');
 const contentCheck = require('../../../framework/validate/content_check.js');
+const dataUtil = require('../../../framework/utils/data_util.js');
 
 class PassportController extends BaseProjectController {
 
@@ -51,12 +52,15 @@ class PassportController extends BaseProjectController {
 
 		// 取得数据
 		let input = this.validateData(rules);
-    console.log(input)
+
 		// 内容审核
 		await contentCheck.checkTextMultiClient(input);
  
-		let service = new PassportService();
-		return await service.register(this._userId, input);
+    let service = new PassportService();
+    
+    const uniqueId = dataUtil.guid();
+
+		return await service.register(uniqueId, input);
 	}
 	
 	/** 修改用户资料 */
@@ -84,10 +88,14 @@ class PassportController extends BaseProjectController {
 		let rules = {};
 
 		// 取得数据
-		let input = this.validateData(rules);
+    let input = this.validateData(rules);
+    let userID = ''
+    if (this._token) {
+      userID = this._token
+    }
 
 		let service = new PassportService();
-		return await service.login(this._userId);
+		return await service.login(userID);
 	}
 
 }

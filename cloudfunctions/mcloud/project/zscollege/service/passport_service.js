@@ -20,14 +20,17 @@ class PassportService extends BaseProjectService {
     weChat,
     reason,
     resource,
-    email
+    email,
+    wishList,
+    acceptAssign,
 	}) {
     // 判断是否存在
 
 		let where = {
 			USER_MINI_OPENID: userId
 		}
-		let cnt = await UserModel.count(where);
+    let cnt = await UserModel.count(where);
+
 		if (cnt > 0)
 			return await this.login(userId);
 
@@ -48,7 +51,9 @@ class PassportService extends BaseProjectService {
       USER_WECHAT: weChat,
       USER_EMAIL: email,
       USER_REASON: reason,
-      USER_RESOURCE: resource
+      USER_RESOURCE: resource,
+      USER_WISHLIST: wishList,
+      USER_ACCEPTASSIGN: acceptAssign,
 		}
 		await UserModel.insert(data);
 
@@ -119,7 +124,7 @@ class PassportService extends BaseProjectService {
 		let where = {
 			'USER_MINI_OPENID': userId
 		};
-		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS';
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE';
 		let user = await UserModel.getOne(where, fields);
 		let token = {};
 		if (user) {
@@ -129,7 +134,11 @@ class PassportService extends BaseProjectService {
 			token.key = user.USER_ID;
 			token.name = user.USER_NAME;
 			token.pic = user.USER_PIC;
-			token.status = user.USER_STATUS;
+      token.status = user.USER_STATUS;
+      token.weChat = user.USER_WECHAT;
+      token.email = user.USER_EMAIL;
+      token.reason = user.USER_REASON;
+      token.resource = user.USER_RESOURCE;
 
 			// 异步更新最近更新时间
 			let dataUpdate = {

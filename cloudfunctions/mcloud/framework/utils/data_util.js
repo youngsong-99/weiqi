@@ -38,6 +38,14 @@ const genRandomAlpha = len => {
 	return rdmString;
 }
 
+// 生成UUID
+function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+  });
+}
+
 // 根据数据库自定义表单提取导出表格标题
 function getTitleByForm(arr) {
 	let formTitle = [];
@@ -496,7 +504,8 @@ module.exports = {
 	padLeft,
 	padRight,
 
-	makeID,
+  makeID,
+  guid,
 
 	genRandomString, // 随机字符串
 	genRandomIntString,

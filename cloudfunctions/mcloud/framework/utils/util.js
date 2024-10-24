@@ -43,11 +43,9 @@ function sleep(time) {
 
 
 
-
 module.exports = {
 	getProjectId,
 	isDefined, //判断变量，参数，对象属性是否定义  
 	sleep,
-	isObjectNull,
-
+	isObjectNull
 }

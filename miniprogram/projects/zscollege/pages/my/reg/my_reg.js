@@ -140,7 +140,7 @@ Page({
 							wx.redirectTo({
 								url: this.data.retUrl,
 							})
-						else
+            else
 						wx.reLaunch({ url: '../index/my_index' });
 					}
 
