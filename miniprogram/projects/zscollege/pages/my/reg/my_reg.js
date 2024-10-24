@@ -120,19 +120,16 @@ Page({
 
 			let forms = this.selectComponent("#cmpt-form").getForms(true);
 			if (!forms) return;
-			data.forms = forms;
+      data.forms = forms;
 
       data.status = projectSetting.USER_REG_CHECK ? 0 : 1;
       data.acceptAssign = this.data.acceptAssign
       data.wishList = this.data.wishList
-      console.log(this.data)
-      console.log(data)
 			let opts = {
 				title: '提交中'
 			}
 			await cloudHelper.callCloudSumbit('passport/register', data, opts).then(result => {
 				if (result && helper.isDefined(result.data.token) && result.data.token) {
-          console.log(123124312)
 					// 用户需要审核，不能登录
 					if (!projectSetting.USER_REG_CHECK) PassportBiz.setToken(result.data.token);
 

@@ -21,7 +21,7 @@ module.exports = { //zscollege大学社团
     { mark: 'department', title: '学院', type: 'text', must: true },
     { mark: 'major', title: '专业', type: 'text', must: true },
     { mark: 'class', title: '年级', type: 'text', must: true },
-    { mark: 'work', title: '公司', type: 'text', must: false },
+    { mark: 'company', title: '公司', type: 'text', must: false },
     { mark: 'position', title: '职务', type: 'text', must: false },
     { mark: 'selfIntro', title: '个人简介', type: 'textarea', must: true },
 	],

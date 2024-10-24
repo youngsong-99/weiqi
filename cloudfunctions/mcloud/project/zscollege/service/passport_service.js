@@ -16,9 +16,14 @@ class PassportService extends BaseProjectService {
 		mobile,
 		name,
 		forms,
-		status
+    status,
+    weChat,
+    reason,
+    resource,
+    email
 	}) {
-		// 判断是否存在
+    // 判断是否存在
+
 		let where = {
 			USER_MINI_OPENID: userId
 		}
@@ -39,7 +44,11 @@ class PassportService extends BaseProjectService {
 			USER_NAME: name,
 			USER_OBJ: dataUtil.dbForms2Obj(forms),
 			USER_FORMS: forms,
-			USER_STATUS: Number(status)
+      USER_STATUS: Number(status),
+      USER_WECHAT: weChat,
+      USER_EMAIL: email,
+      USER_REASON: reason,
+      USER_RESOURCE: resource
 		}
 		await UserModel.insert(data);
 

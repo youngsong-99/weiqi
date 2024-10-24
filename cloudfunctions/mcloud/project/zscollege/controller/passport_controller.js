@@ -36,20 +36,25 @@ class PassportController extends BaseProjectController {
 	/** 注册 */
 	async register() {
     // 数据校验
-
 		let rules = {
-			name: 'must|string|min:1|max:30|name=昵称',
+			name: 'must|string|min:1|max:30|name=姓名',
 			mobile: 'must|mobile|name=手机',
 			forms: 'array|name=表单',
-			status: 'int|default=1'
+      status: 'int|default=1',
+      weChat: 'must|string|min:1|max:30|name=微信',
+      email:'must|string|min:1|max:30|name=邮箱',
+      reason:'must|string|min:1|max:300|name=原因',
+      resource:'must|string|min:1|max:300|name=资源',
+      wishList: 'must|array|name=意愿',
+      acceptAssign: 'must|boolean|name=意愿',
 		};
 
 		// 取得数据
 		let input = this.validateData(rules);
-
+    console.log(input)
 		// 内容审核
 		await contentCheck.checkTextMultiClient(input);
-
+ 
 		let service = new PassportService();
 		return await service.register(this._userId, input);
 	}
