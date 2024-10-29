@@ -94,9 +94,9 @@ async function app(event, context) {
 		controllerName = controllerName.toLowerCase().trim();
 		const ControllerClass = require('project/'+PID +'/controller/' + controllerName + '.js');
 		const controller = new ControllerClass(r, PID + '^^^' + openId, event);
- 
+    
 		// 调用方法    
-		await controller['initSetup']();
+    await controller['initSetup']();
 		let result = await controller[actionName]();
 
 		// 返回值处理

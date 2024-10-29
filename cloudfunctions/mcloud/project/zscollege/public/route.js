@@ -10,11 +10,13 @@ module.exports = {
 
 	'home/setup_get': 'home_controller@getSetup',
 
+  'passport/login_with_password': 'passport_controller@loginWithPassWord',
 	'passport/login': 'passport_controller@login',
 	'passport/phone': 'passport_controller@getPhone',
 	'passport/my_detail': 'passport_controller@getMyDetail',
 	'passport/register': 'passport_controller@register',
-	'passport/edit_base': 'passport_controller@editBase',
+  'passport/edit_base': 'passport_controller@editBase',
+  
 
 	// 收藏
 	'fav/update': 'fav_controller@updateFav',

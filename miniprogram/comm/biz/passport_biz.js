@@ -302,5 +302,11 @@ PassportBiz.CHECK_FORM = {
 	forms: 'formForms|array'
 };
 
+/** 登录表单校验    */
+PassportBiz.CHECK_FORM_LOGIN = {
+	loginAccount: 'loginAccount|must|string|min:1|name=登录账户',
+  loginPassword: 'loginPassword|must|min:1|name=密码',
+};
+
 
 module.exports = PassportBiz;
