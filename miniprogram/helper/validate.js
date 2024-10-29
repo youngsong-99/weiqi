@@ -9,6 +9,8 @@
  const CHECK_OPEN = true;
  const CHECK_SOURCE = 'client'; //client/admin 
 
+ let tmpPassword = ''
+
  /**
   * 判断变量，参数，对象属性是否定义
   * @param {*} val 
@@ -269,6 +271,20 @@
  	if (!chk) return hint;
  }
 
+ // 密码，由字母和数字组成
+ function checkPassword(value, desc = '') {
+  if (isNull(value)) return;
+
+ 	let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+ 	if (!reg.test(value)) return desc + '密码由字母和数字组成';
+}
+
+// 密码，由字母和数字组成
+function checkConfirmPassword(value, tmpPassword, desc = '') {
+  if (isNull(value)) return;
+ 	if (value != tmpPassword) return desc + '请确认密码一致';
+}
+
  function checkArray(value, desc = '') {
  	if (!Array.isArray(value))
  		return desc + '填写错误arr';
@@ -459,14 +475,13 @@
  		}
 
  		returnData[key] = val;
+    let fromStep = (CHECK_SOURCE == 'admin') ? 0 : 1; //admin/client
 
- 		let fromStep = (CHECK_SOURCE == 'admin') ? 0 : 1; //admin/client
  		for (let i = fromStep; i < arr.length; i++) {
  			let result = '';
 
  			let rules = arr[i].split(':');
  			let ruleName = rules[0];
-
 			// 空 且非必填的 不校验 
 			if (ruleName != 'must' && val === undefined) continue;
 
@@ -543,7 +558,14 @@
  					break;
  				case 'letter_num':
  					result = checkLetterNum(val, desc);
- 					break;
+          break;
+        case 'password':
+          tmpPassword = val
+          result = checkPassword(val, desc);
+          break;
+        case 'confirmPassword':
+          result = checkConfirmPassword(val, tmpPassword, desc);
+          break;
  			}
 
  			if (result) {
@@ -616,5 +638,5 @@
  	checkId,
  	checkLetter,
  	checkLetterNum,
-
+  checkPassword,
  }

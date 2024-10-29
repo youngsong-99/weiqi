@@ -36,6 +36,17 @@
 	</view>
 	<view wx:if="{{formEmailFocus}}" class="hint-desc error">{{formEmailFocus}}</view>
 
+  <view class="form-group">
+		<view class="title must">密码</view>
+		<input type="text" placeholder="填写您的密码" placeholder-class="phc" model:value="{{formPassword}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formPasswordFocus}}" class="hint-desc error">{{formPasswordFocus}}</view>
+  <view class="form-group">
+		<view class="title must">确认密码</view>
+		<input type="text" placeholder="请确认密码" placeholder-class="phc" model:value="{{formConfirmPassword}}" maxlength="30"></input>
+	</view>
+	<view wx:if="{{formConfirmPasswordFocus}}" class="hint-desc error">{{formConfirmPasswordFocus}}</view>
+
 </view>
 
 <view class="form-box shadow-project card-project margin-top-xs">

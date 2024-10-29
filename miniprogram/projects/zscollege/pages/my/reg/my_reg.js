@@ -116,7 +116,7 @@ Page({
  
 			// 数据校验 
 			data = validate.check(data, PassportBiz.CHECK_FORM, this);
-			if (!data) return;
+      if (!data) return;
 
 			let forms = this.selectComponent("#cmpt-form").getForms(true);
 			if (!forms) return;

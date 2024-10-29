@@ -23,6 +23,7 @@ class PassportService extends BaseProjectService {
     email,
     wishList,
     acceptAssign,
+    password,
 	}) {
     // 判断是否存在
 
@@ -54,6 +55,7 @@ class PassportService extends BaseProjectService {
       USER_RESOURCE: resource,
       USER_WISHLIST: wishList,
       USER_ACCEPTASSIGN: acceptAssign,
+      USER_MINI_PASSWORD: password,
 		}
 		await UserModel.insert(data);
 

@@ -66,6 +66,7 @@ class PassportController extends BaseProjectController {
       resource:'must|string|min:1|max:300|name=资源',
       wishList: 'must|array|name=意愿',
       acceptAssign: 'must|boolean|name=意愿',
+      password: 'must|string|min:8|max:30|name=密码'
 		};
 
 		// 取得数据
