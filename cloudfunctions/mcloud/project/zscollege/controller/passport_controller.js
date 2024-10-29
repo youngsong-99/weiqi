@@ -11,6 +11,24 @@ const dataUtil = require('../../../framework/utils/data_util.js');
 
 class PassportController extends BaseProjectController {
 
+  /** 密码登录 */
+  async loginWithPassWord() {
+    // 数据校验
+    let rules = {};
+
+    // 取得数据
+    let input = this.validateData(rules);
+    let account = ''
+    let password = ''
+
+    if (this._request.loginAccount && this._request.loginPassword) {
+    account = this._request.loginAccount
+    password = this._request.loginPassword
+    }
+    let service = new PassportService();
+    return await service.loginWithPassWord(account);
+  } 
+
 	/** 取得我的用户信息 */
 	async getMyDetail() {
 		let service = new PassportService();
@@ -90,13 +108,16 @@ class PassportController extends BaseProjectController {
 		// 取得数据
     let input = this.validateData(rules);
     let userID = ''
+    console.log(this)
     if (this._token) {
       userID = this._token
     }
-
+    console.log(userID)
 		let service = new PassportService();
 		return await service.login(userID);
-	}
+  }
+  
+ 
 
 }
 

@@ -41,6 +41,7 @@ UserModel.DB_STRUCTURE = {
   USER_RESOURCE: 'string|false|comment=可提供资源',
   USER_WISHLIST: 'array|true|default=[]',
   USER_ACCEPTASSIGN: 'bool|false',
+  USER_MINI_PASSWORD: 'string|true|comment=密码',
 }
 
 // 字段前缀

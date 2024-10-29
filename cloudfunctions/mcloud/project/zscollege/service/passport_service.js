@@ -153,10 +153,54 @@ class PassportService extends BaseProjectService {
 		return {
 			token
 		};
+  }
+  
+  /** 登录 */
+	async loginWithPassWord(account, password) {
+
+		let where = {
+      'USER_MOBILE':account
+		};
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE';
+    let user = await UserModel.getOne(where, fields);
+    let token = {}
+		if (user == null) {
+      where = {
+        'USER_EMAIL':account
+      };
+      user = await UserModel.getOne(where, fields);
+		} 
+    
+    if (user) {
+      setUserInfo(user, token, where)	
+    } else {
+			token = null;
+    }
+		return {
+			token
+		};
 	}
 
+}
 
+function setUserInfo(user, token, where) {
+  	// 正常用户
+    token.id = user.USER_MINI_OPENID;
+    token.key = user.USER_ID;
+    token.name = user.USER_NAME;
+    token.pic = user.USER_PIC;
+    token.status = user.USER_STATUS;
+    token.weChat = user.USER_WECHAT;
+    token.email = user.USER_EMAIL;
+    token.reason = user.USER_REASON;
+    token.resource = user.USER_RESOURCE;
 
+    // 异步更新最近更新时间
+    let dataUpdate = {
+      USER_LOGIN_TIME: this._timestamp
+    };
+    UserModel.edit(where, dataUpdate);
+    UserModel.inc(where, 'USER_LOGIN_CNT', 1);
 }
 
 module.exports = PassportService;
