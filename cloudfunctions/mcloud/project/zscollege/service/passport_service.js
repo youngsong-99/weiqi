@@ -82,7 +82,7 @@ class PassportService extends BaseProjectService {
 		let where = {
 			USER_MINI_OPENID: userId
 		}
-		let fields = 'USER_MOBILE,USER_NAME,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON'
+		let fields = 'USER_MOBILE,USER_NAME,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON,USER_EMAIL,USER_MINI_PASSWORD,USER_WECHAT'
 		return await UserModel.getOne(where, fields);
 	}
 
@@ -90,7 +90,10 @@ class PassportService extends BaseProjectService {
 	async editBase(userId, {
 		mobile,
 		name,
-		forms
+    forms,
+    email,
+    weChat,
+    password,
 	}) {
 		let whereMobile = {
 			USER_MOBILE: mobile,
@@ -98,7 +101,7 @@ class PassportService extends BaseProjectService {
 		}
 		let cnt = await UserModel.count(whereMobile);
 		if (cnt > 0) this.AppError('该手机已注册');
-
+ 
 		let where = {
 			USER_MINI_OPENID: userId
 		}
@@ -110,7 +113,10 @@ class PassportService extends BaseProjectService {
 			USER_MOBILE: mobile,
 			USER_NAME: name,
 			USER_OBJ: dataUtil.dbForms2Obj(forms),
-			USER_FORMS: forms,
+      USER_FORMS: forms,
+      USER_WECHAT: weChat,
+      USER_EMAIL: email,
+      USER_MINI_PASSWORD: password,
 		};
 
 		if (user.USER_STATUS == UserModel.STATUS.UNCHECK)

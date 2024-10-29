@@ -63,8 +63,8 @@ function get(k, def = null) {
  * 删除
  */
 function remove(k) {
-	if (!k) return null;
-	
+  if (!k) return null;
+  
 	wx.removeStorageSync(k);
 	wx.removeStorageSync(k + TIME_SUFFIX);
 }

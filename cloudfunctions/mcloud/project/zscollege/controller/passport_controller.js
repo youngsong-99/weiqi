@@ -31,8 +31,8 @@ class PassportController extends BaseProjectController {
 
 	/** 取得我的用户信息 */
 	async getMyDetail() {
-		let service = new PassportService();
-		return await service.getMyDetail(this._userId);
+    let service = new PassportService();
+		return await service.getMyDetail(this._token);
 	}
 
 	/** 获取手机号码 */
@@ -88,7 +88,11 @@ class PassportController extends BaseProjectController {
 		let rules = {
 			name: 'must|string|min:1|max:30|name=昵称',
 			mobile: 'must|mobile|name=手机',
-			forms: 'array|name=表单',
+      forms: 'array|name=表单',
+      status: 'int|default=1',
+      weChat: 'must|string|min:1|max:30|name=微信',
+      email:'must|string|min:1|max:30|name=邮箱',
+      password: 'must|string|min:8|max:30|name=密码'
 		};
 
 		// 取得数据
@@ -96,9 +100,9 @@ class PassportController extends BaseProjectController {
 
 		// 内容审核
 		await contentCheck.checkTextMultiClient(input);
-
+console.log(this)
 		let service = new PassportService();
-		return await service.editBase(this._userId, input);
+		return await service.editBase(this._token, input);
 	}
 
 	/** 登录 */
@@ -109,11 +113,11 @@ class PassportController extends BaseProjectController {
 		// 取得数据
     let input = this.validateData(rules);
     let userID = ''
-    console.log(this)
+
     if (this._token) {
       userID = this._token
     }
-    console.log(userID)
+
 		let service = new PassportService();
 		return await service.login(userID);
   }
