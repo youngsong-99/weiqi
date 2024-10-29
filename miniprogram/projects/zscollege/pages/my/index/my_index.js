@@ -19,14 +19,12 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
- 
-		if (PassportBiz.isLogin()) {
+    if (PassportBiz.isLogin()) {
       let user = {};
       user.USER_NAME = PassportBiz.getUserName();
 			this.setData({ user });
     }
 		ProjectBiz.initPage(this);
-
 	},
 
 	/**
@@ -39,11 +37,6 @@ Page({
 	 */
 	onShow: async function () {  
     PassportBiz.loginSilenceMust(this); 
-    // let res = PassportBiz.loginSilenceMustV2(this); 
-
-    // if(res) {
-    //   this._loadUser();
-    // }
 	},
 
 	/**

@@ -38,14 +38,16 @@ Page({
 		this.setData({
 			isLoad: true,
 			isEdit: true,
-
 			user,
-
 			fields: projectSetting.USER_FIELDS,
 
 			formName: user.USER_NAME,
 			formMobile: user.USER_MOBILE,
-			formForms: user.USER_FORMS
+      formForms: user.USER_FORMS,
+      formWechat: user.USER_WECHAT,
+      formEmail: user.USER_EMAIL,
+      formPassword: user.USER_MINI_PASSWORD,
+      formConfirmPassword: user.USER_MINI_PASSWORD
 		})
 	},
 
@@ -102,7 +104,7 @@ Page({
 
 			let data = this.data; 
 			// 数据校验 
-			data = validate.check(data, PassportBiz.CHECK_FORM, this);
+			data = validate.check(data, PassportBiz.CHECK_EDIT_FORM, this);
 			if (!data) return;
 
 			let forms = this.selectComponent("#cmpt-form").getForms(true);

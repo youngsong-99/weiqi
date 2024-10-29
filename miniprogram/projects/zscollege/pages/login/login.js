@@ -101,8 +101,10 @@ Page({
 					if (projectSetting.USER_REG_CHECK)
 						pageHelper.showModal('注册完成，等待系统审核', '温馨提示', callback);
 					else
-					pageHelper.showSuccToast('注册成功', 1500, callback);
-				}
+					pageHelper.showSuccToast('登录成功', 1500, callback);
+        }
+        else
+          pageHelper.showErrToast('用户名密码错误',1500,null)
 			});
 		} catch (err) {
 			console.error(err);

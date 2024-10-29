@@ -142,13 +142,13 @@ class PassportBiz extends BaseBiz {
 		};
     
 		let res = await cloudHelper.callCloudSumbit('passport/login', {}, opt).then(result => {
-      PassportBiz.clearToken();
-
 			if (result && helper.isDefined(result.data.token) && result.data.token && result.data.token.status == 1) {
-
-				PassportBiz.setToken(result.data.token);
+        PassportBiz.setToken(result.data.token);
+        let user = {}
+        user.USER_NAME = result.data.token.name
 				if (that) that.setData({
-					isLogin: true
+          isLogin: true,
+          user: user
 				});
 
 				return true;
@@ -291,8 +291,19 @@ class PassportBiz extends BaseBiz {
   
 
 
-/** 表单校验    */
-PassportBiz.CHECK_FORM = {
+/** 编辑个人信息表单校验    */
+PassportBiz.CHECK_EDIT_FORM = {
+	name: 'formName|must|string|min:1|max:30|name=昵称',
+  mobile: 'formMobile|must|len:11|mobile|name=手机',
+  weChat: 'formWechat|must|string|min:1|max:30|name=微信',
+  email:'formEmail|must|string|min:1|max:30|email|name=邮箱',
+  forms: 'formForms|array',
+  password: 'formPassword|must|string|min:8|max:30|password|name=密码',
+  confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
+};
+
+/** 注册表单校验    */
+PassportBiz.CHECK_REGISTER_FORM = {
 	name: 'formName|must|string|min:1|max:30|name=昵称',
   mobile: 'formMobile|must|len:11|mobile|name=手机',
   weChat: 'formWechat|must|string|min:1|max:30|name=微信',
