@@ -294,12 +294,14 @@ class PassportBiz extends BaseBiz {
 /** 表单校验    */
 PassportBiz.CHECK_FORM = {
 	name: 'formName|must|string|min:1|max:30|name=昵称',
-  mobile: 'formMobile|must|len:11|name=手机',
+  mobile: 'formMobile|must|len:11|mobile|name=手机',
   weChat: 'formWechat|must|string|min:1|max:30|name=微信',
-  email:'formEmail|must|string|min:1|max:30|name=邮箱',
+  email:'formEmail|must|string|min:1|max:30|email|name=邮箱',
   reason:'formReason|must|string|min:1|max:300|name=原因',
   resource:'formResource|must|string|min:1|max:300|name=资源',
-	forms: 'formForms|array'
+  forms: 'formForms|array',
+  password: 'formPassword|must|string|min:8|max:30|password|name=密码',
+  confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
 };
 
 /** 登录表单校验    */
