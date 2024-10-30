@@ -56,6 +56,7 @@ class PassportService extends BaseProjectService {
       USER_WISHLIST: wishList,
       USER_ACCEPTASSIGN: acceptAssign,
       USER_MINI_PASSWORD: password,
+      USER_PRIVACY: false,
 		}
 		await UserModel.insert(data);
 

@@ -161,11 +161,11 @@ class PassportBiz extends BaseBiz {
 				wx.showModal({
 					title: '温馨提示',
 					content: '此功能仅限注册用户',
-					confirmText: '马上注册',
+					confirmText: '登录',
 					cancelText: '取消',
 					success(result) {
 						if (result.confirm) {
-							let url = pageHelper.fmtURLByPID('/pages/my/reg/my_reg') + '?retUrl=back';
+							let url = pageHelper.fmtURLByPID('/pages/login/login') + '?retUrl=back';
 							wx.navigateTo({ url });
 
 						} else if (result.cancel) {
@@ -180,12 +180,12 @@ class PassportBiz extends BaseBiz {
 				wx.showModal({
 					title: '温馨提示',
 					content: '此功能仅限注册用户',
-					confirmText: '马上注册',
+					confirmText: '登录',
 					cancelText: '返回',
 					success(result) {
 						if (result.confirm) {
 							let retUrl = encodeURIComponent(pageHelper.getCurrentPageUrlWithArgs());
-							let url = pageHelper.fmtURLByPID('/pages/my/reg/my_reg') + '?retUrl=' + retUrl;
+							let url = pageHelper.fmtURLByPID('/pages/login/login') + '?retUrl=' + retUrl;
 							wx.redirectTo({ url });
 						} else if (result.cancel) {
 							let len = getCurrentPages().length;
@@ -206,11 +206,11 @@ class PassportBiz extends BaseBiz {
 				wx.showModal({
 					title: '温馨提示',
 					content: '此功能仅限注册用户',
-					confirmText: '马上注册',
+					confirmText: '登录',
 					cancelText: '返回',
 					success(result) {
 						if (result.confirm) {
-							let url = pageHelper.fmtURLByPID('/pages/my/reg/my_reg');
+							let url = pageHelper.fmtURLByPID('/pages/login/login');
 							wx.reLaunch({ url });
 						} else if (result.cancel) {
 							wx.navigateBack();
