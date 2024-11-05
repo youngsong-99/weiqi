@@ -10,6 +10,7 @@ module.exports = {
 
 	'home/setup_get': 'home_controller@getSetup',
 
+  'passport/login_with_wechat': 'passport_controller@loginWithWechat',
   'passport/login_with_password': 'passport_controller@loginWithPassWord',
 	'passport/login': 'passport_controller@login',
 	'passport/phone': 'passport_controller@getPhone',

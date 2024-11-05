@@ -95,7 +95,12 @@ function callCloud(route, params = {}, options) {
 	} else {
     //正常用户
     let user = cacheHelper.get(constants.CACHE_TOKEN);
-    if (user && user.id) token = user.id;
+    if (user && user.id) 
+    {
+      token = user.id;
+      console.log("get userid")
+      console.log(token)
+    }
 	}
 
 	return new Promise(function (resolve, reject) {

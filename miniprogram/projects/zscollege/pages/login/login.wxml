@@ -23,6 +23,7 @@
 <view>
 <navigator url='../my/reg/my_reg'>用户注册</navigator>
 </view>
+<button bindtap="bindSubmitTap" class="btn-base btn-project shadow" open-type="getUserInfo" bindtap="getInfo">微信登陆</button>
 </view>
 
 <view style="height:100rpx"></view>
