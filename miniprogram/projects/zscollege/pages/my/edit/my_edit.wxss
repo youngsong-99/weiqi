@@ -16,3 +16,27 @@
 	flex: 1;
 	text-align: left;
 }
+
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  height: 100rpx;
+  position: relative;
+  background: #fff;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4rpx solid transparent;
+}
+
+.active {
+  color: blue;
+  border-bottom: 4rpx solid blue;
+}
+
+.content_wrapper{
+  flex: 1;
+}

@@ -81,6 +81,13 @@ class PassportBiz extends BaseBiz {
 		let token = cacheHelper.get(constants.CACHE_TOKEN);
 		if (!token) return '';
 		return token.name || '';
+  }
+  
+  // 获取user name 
+	static getWechatName() {
+		let token = cacheHelper.get(constants.CACHE_TOKEN);
+		if (!token) return '';
+		return token.userWechatNickname || '';
 	}
 
 	static getStatus() {
@@ -129,7 +136,7 @@ class PassportBiz extends BaseBiz {
 			if (that)
 				that.setData({
 					isLogin: true
-				});
+        });
 			return true;
 		} else {
 			if (that) that.setData({
@@ -139,13 +146,21 @@ class PassportBiz extends BaseBiz {
 
 		let opt = {
 			title: title || '登录中',
-		};
+    };
     
 		let res = await cloudHelper.callCloudSumbit('passport/login', {}, opt).then(result => {
+
 			if (result && helper.isDefined(result.data.token) && result.data.token && result.data.token.status == 1) {
+
         PassportBiz.setToken(result.data.token);
         let user = {}
-        user.USER_NAME = result.data.token.name
+
+        if (result.data.token.name != '') {
+          user.USER_NAME = result.data.token.name
+        } else if (result.data.token.userWechatNickname != '') {
+          user.USER_NAME = result.data.token.userWechatNickname
+        } 
+        
 				if (that) that.setData({
           isLogin: true,
           user: user

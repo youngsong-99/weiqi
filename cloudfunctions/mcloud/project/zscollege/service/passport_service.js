@@ -61,6 +61,31 @@ class PassportService extends BaseProjectService {
 		await UserModel.insert(data);
 
 		return await this.login(userId);
+  }
+  
+  	// 微信注册
+	async registerWithWechatNickName(userId,
+		wechatNickName
+	) {
+    // 判断是否存在
+
+		let where = {
+			USER_MINI_OPENID: userId
+		}
+    let cnt = await UserModel.count(where);
+
+		if (cnt > 0)
+			return await this.login(userId);
+    console.log(wechatNickName)
+		// 入库
+		let data = {
+			USER_MINI_OPENID: userId,
+			USER_WECHAT_NICKNAME: wechatNickName,
+      USER_PRIVACY: false,
+		}
+		await UserModel.insert(data);
+
+		return await this.login(userId);
 	}
 
 	/** 获取手机号码 */
@@ -133,9 +158,11 @@ class PassportService extends BaseProjectService {
 		let where = {
 			'USER_MINI_OPENID': userId
 		};
-		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE';
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME';
 		let user = await UserModel.getOne(where, fields);
-		let token = {};
+    let token = {};
+
+    console.log(userId)
 		if (user) {
 
 			// 正常用户
@@ -148,6 +175,7 @@ class PassportService extends BaseProjectService {
       token.email = user.USER_EMAIL;
       token.reason = user.USER_REASON;
       token.resource = user.USER_RESOURCE;
+      token.userWechatNickname = user.USER_WECHAT_NICKNAME;
 
 			// 异步更新最近更新时间
 			let dataUpdate = {
@@ -163,6 +191,27 @@ class PassportService extends BaseProjectService {
 			token
 		};
   }
+
+  /** 登录 */
+	async loginWithWechat(wechat) {
+
+		let where = {
+      'USER_WECHAT_NICKNAME':wechat
+		};
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME';
+    let user = await UserModel.getOne(where, fields);
+    let token = {}
+		
+    if (user) {
+      setUserInfo(user, token, where)	
+    } else {
+			token = null;
+    }
+
+		return {
+			token
+		};
+	}
   
   /** 登录 */
 	async loginWithPassWord(account, password) {
@@ -203,6 +252,7 @@ function setUserInfo(user, token, where) {
     token.email = user.USER_EMAIL;
     token.reason = user.USER_REASON;
     token.resource = user.USER_RESOURCE;
+    token.wechatNickName = user.USER_WECHAT_NICKNAME;
 
     // 异步更新最近更新时间
     let dataUpdate = {

@@ -21,7 +21,14 @@ Page({
 	onLoad: async function (options) {
     if (PassportBiz.isLogin()) {
       let user = {};
-      user.USER_NAME = PassportBiz.getUserName();
+      let username = PassportBiz.getUserName();
+      let wechat = PassportBiz.getWechatName();
+      if (username != '') {
+        user.USER_NAME = username;
+      } else if (wechat != ''){
+        user.USER_NAME = wechat;
+      }
+
 			this.setData({ user });
     }
 		ProjectBiz.initPage(this);

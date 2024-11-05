@@ -15,7 +15,11 @@ Page({
 		isEdit: true,
 
 		userRegCheck: projectSetting.USER_REG_CHECK,
-		mobileCheck: setting.MOBILE_CHECK
+    mobileCheck: setting.MOBILE_CHECK,
+  
+    tabs: ['新闻', '活动', '附近'],
+    tabIndex: 0
+
 	},
 
 	/**
@@ -123,5 +127,12 @@ Page({
 		} catch (err) {
 			console.error(err);
 		}
-	}
+  },
+  
+  onTabClick(e) {
+    let id = e.currentTarget.id;
+    this.setData({
+      tabIndex: id,
+    })
+  },
 })

@@ -11,6 +11,29 @@ const dataUtil = require('../../../framework/utils/data_util.js');
 
 class PassportController extends BaseProjectController {
 
+/** 微信登录 */
+async loginWithWechat() {
+  // 数据校验
+  let rules = {};
+
+  // 取得数据
+  let input = this.validateData(rules);
+  let wechatNickName = ''
+
+  if (this._request.userInfo && this._request.userInfo.nickname!="") {
+    wechatNickName = this._request.userInfo.nickName
+  }
+  let service = new PassportService();
+  let res = await service.loginWithWechat(wechatNickName);
+
+  if (res.token) {
+    return res.token
+  } else {
+    const uniqueId = dataUtil.guid();
+		return await service.registerWithWechatNickName(uniqueId, wechatNickName);
+  }
+} 
+
   /** 密码登录 */
   async loginWithPassWord() {
     // 数据校验
@@ -28,6 +51,8 @@ class PassportController extends BaseProjectController {
     let service = new PassportService();
     return await service.loginWithPassWord(account);
   } 
+
+  
 
 	/** 取得我的用户信息 */
 	async getMyDetail() {
@@ -100,7 +125,7 @@ class PassportController extends BaseProjectController {
 
 		// 内容审核
 		await contentCheck.checkTextMultiClient(input);
-console.log(this)
+
 		let service = new PassportService();
 		return await service.editBase(this._token, input);
 	}
@@ -117,7 +142,7 @@ console.log(this)
     if (this._token) {
       userID = this._token
     }
-
+  
 		let service = new PassportService();
 		return await service.login(userID);
   }
