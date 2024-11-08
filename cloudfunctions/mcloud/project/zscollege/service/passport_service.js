@@ -82,6 +82,7 @@ class PassportService extends BaseProjectService {
 			USER_MINI_OPENID: userId,
 			USER_WECHAT_NICKNAME: wechatNickName,
       USER_PRIVACY: false,
+      USER_ROLE:0,
 		}
 		await UserModel.insert(data);
 
@@ -108,7 +109,7 @@ class PassportService extends BaseProjectService {
 		let where = {
 			USER_MINI_OPENID: userId
 		}
-		let fields = 'USER_MOBILE,USER_NAME,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON,USER_EMAIL,USER_MINI_PASSWORD,USER_WECHAT'
+		let fields = 'USER_MOBILE,USER_NAME,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON,USER_EMAIL,USER_MINI_PASSWORD,USER_WECHAT,USER_WECHAT_NICKNAME,USER_ROLE,USER_APPLICATION_STATUS'
 		return await UserModel.getOne(where, fields);
 	}
 
@@ -120,6 +121,11 @@ class PassportService extends BaseProjectService {
     email,
     weChat,
     password,
+    userApplicationStatus,
+    wishList,
+    resourceList,
+    reason,
+    userRole
 	}) {
 		let whereMobile = {
 			USER_MOBILE: mobile,
@@ -127,7 +133,7 @@ class PassportService extends BaseProjectService {
 		}
 		let cnt = await UserModel.count(whereMobile);
 		if (cnt > 0) this.AppError('该手机已注册');
- 
+
 		let where = {
 			USER_MINI_OPENID: userId
 		}
@@ -141,12 +147,27 @@ class PassportService extends BaseProjectService {
 			USER_OBJ: dataUtil.dbForms2Obj(forms),
       USER_FORMS: forms,
       USER_WECHAT: weChat,
-      USER_EMAIL: email,
       USER_MINI_PASSWORD: password,
-		};
+      USER_APPLICATION_STATUS:userApplicationStatus,
+      USER_ROLE:userRole,
+    };
+
+    if (userApplicationStatus == UserModel.APPLICATION_STATUS.IN_PROGRESS_MEMBER || userApplicationStatus == UserModel.APPLICATION_STATUS.IN_PROGRESS_USER) {
+      data.USER_REASON = reason
+      data.USER_RESOURCELIST = resourceList
+    }
+
+    if (userApplicationStatus == UserModel.APPLICATION_STATUS.IN_PROGRESS_MEMBER) {
+      data.USER_EMAIL = email
+      data.USER_WISHLIST = wishList
+    }
+
+    if (userRole == UserModel.ROLE.MEMBER) {
+      data.USER_EMAIL = email
+    }
 
 		if (user.USER_STATUS == UserModel.STATUS.UNCHECK)
-			data.USER_STATUS = UserModel.STATUS.UNUSE;
+      data.USER_STATUS = UserModel.STATUS.UNUSE;
 
 		await UserModel.edit(where, data);
 
@@ -158,7 +179,7 @@ class PassportService extends BaseProjectService {
 		let where = {
 			'USER_MINI_OPENID': userId
 		};
-		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME';
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME,USER_ROLE,USER_APPLICATION_STATUS';
 		let user = await UserModel.getOne(where, fields);
     let token = {};
 
@@ -176,6 +197,8 @@ class PassportService extends BaseProjectService {
       token.reason = user.USER_REASON;
       token.resource = user.USER_RESOURCE;
       token.userWechatNickname = user.USER_WECHAT_NICKNAME;
+      token.userRole = user.USER_ROLE;
+      token.userApplicationStatus = user.USER_APPLICATION_STATUS;
 
 			// 异步更新最近更新时间
 			let dataUpdate = {
@@ -198,7 +221,7 @@ class PassportService extends BaseProjectService {
 		let where = {
       'USER_WECHAT_NICKNAME':wechat
 		};
-		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME';
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME,USER_ROLE,USER_APPLICATION_STATUS';
     let user = await UserModel.getOne(where, fields);
     let token = {}
 		
@@ -219,7 +242,7 @@ class PassportService extends BaseProjectService {
 		let where = {
       'USER_MOBILE':account
 		};
-		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE';
+		let fields = 'USER_ID,USER_MINI_OPENID,USER_NAME,USER_PIC,USER_STATUS,USER_WECHAT,USER_EMAIL,USER_REASON,USER_RESOURCE,USER_WECHAT_NICKNAME,USER_ROLE,USER_APPLICATION_STATUS';
     let user = await UserModel.getOne(where, fields);
     let token = {}
 		if (user == null) {
@@ -253,6 +276,8 @@ function setUserInfo(user, token, where) {
     token.reason = user.USER_REASON;
     token.resource = user.USER_RESOURCE;
     token.wechatNickName = user.USER_WECHAT_NICKNAME;
+    token.userRole= user.USER_ROLE;
+    token.userApplicationStatus = user.USER_APPLICATION_STATUS;
 
     // 异步更新最近更新时间
     let dataUpdate = {

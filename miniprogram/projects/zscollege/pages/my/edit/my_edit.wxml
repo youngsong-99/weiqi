@@ -1,7 +1,53 @@
 <view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
 <view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
 
-<view wx:if="{{isLoad}}" class="main padding-project">  
+<view class="page" wx:if="{{userApplicationStatus == 0}}">
+  <!-- 导航条.tab太多的时候需要使用scrollview -->
+  <view class="navBar">
+    <block wx:for="{{tabs}}" wx:key="item">
+      <view id="{{index}}" class="navItem {{tabIndex == index ? 'active' : '' }}" bindtap="onTabClick">
+        <view class="navItemTitle">{{item}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content_wrapper">
+    <!-- 第一个tab -->
+    <block wx:if="{{tabIndex == 0}}">
+      <view wx:if="{{isLoad}}" class="main padding-project">  
 	<include src="user_form.wxml" />
-	<button bindtap="bindSubmitTap" class="btn-base btn-project shadow">修改资料</button>
+	<button bindtap="bindSubmitTapUser" class="btn-base btn-project shadow">提交申请</button>
+</view>
+    </block>
+
+    <!-- 第二个tab -->
+    <block wx:if="{{tabIndex == 1}}">
+      <view wx:if="{{isLoad}}" class="main padding-project">  
+	      <include src="member_form.wxml" />
+	        <button bindtap="bindSubmitTapMember" class="btn-base btn-project shadow">提交申请</button>
+        </view>
+    </block>
+
+  </view>
+
+</view>
+
+<view class="page" wx:if="{{userApplicationStatus == 1}}">
+  <view class="main padding-project">您的申请正在审核中</view>
+</view>
+
+<view class="page" wx:if="{{userApplicationStatus == 2}}">
+  <view class="main padding-project">您的申请正在审核中</view>
+</view>
+
+<view class="page" wx:if="{{userApplicationStatus == 3}}">
+<view wx:if="{{userRole == 1}}" class="main padding-project">  
+	<include src="user_form.wxml" />
+	<button bindtap="bindSubmitTapUser" class="btn-base btn-project shadow">提交修改</button>
+</view>
+<view wx:if="{{userRole == 2}}" class="main padding-project">  
+  <include src="member_form.wxml" />
+    <button bindtap="bindSubmitTapMember" class="btn-base btn-project shadow">提交修改</button>
+  </view>
 </view>

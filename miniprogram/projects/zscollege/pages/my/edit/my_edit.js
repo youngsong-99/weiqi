@@ -17,9 +17,32 @@ Page({
 		userRegCheck: projectSetting.USER_REG_CHECK,
     mobileCheck: setting.MOBILE_CHECK,
   
-    tabs: ['新闻', '活动', '附近'],
-    tabIndex: 0
+    tabs: ['会员', '管理团队'],
+    tabIndex: 0,
 
+    wishItems: [
+      {value: 'OPT', name: 'OPT运营中心'},
+      {value: 'FRC', name: 'FRC研究中心'},
+      {value: 'FPC', name: 'FPC项目中心'},
+      {value: '未来梦想家', name: '未来梦想家俱乐部'},
+      {value: '科技金融俱乐部', name: '科技金融俱乐部'},
+      {value: '对话企业家', name: '对话企业家项目组'},
+      {value: '协会顾问', name: '协会顾问'},
+    ],
+    resourceItems: [
+      {value: '所在机构合作机会', name: '所在机构合作机会'},
+      {value: '企业参访交流', name: '企业参访交流'},
+      {value: '分享沙龙活动场地', name: '分享沙龙活动场地'},
+      {value: '业内活动分享嘉宾', name: '业内活动分享嘉宾'},
+      {value: '企业或行业赞助推广', name: '企业或行业赞助推广'},
+      {value: '行业经验', name: '行业经验'},
+      {value: '愿意培训在校学生有行业经验', name: '愿意培训在校学生有行业经验'},
+      {value: '新媒体运营能力', name: '新媒体运营能力'},
+      {value: '活动策划/组织/管理/运营能力', name: '活动策划/组织/管理/运营能力'},
+      {value: '海报制作/图案设计', name: '海报制作/图案设计'},
+      {value: '视频拍摄/视频处理', name: '视频拍摄/视频处理'},
+      {value: '其他', name: '其他'},
+    ],
 	},
 
 	/**
@@ -38,12 +61,17 @@ Page({
 		let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
 		if (!user)
 			return wx.redirectTo({ url: '../reg/my_reg' });
-
+    
+    let fields = projectSetting.USER_FIELDS
+    if (user.USER_ROLE == 2) {
+      fields = projectSetting.MEMBER_FIELDS
+    }
+    
 		this.setData({
 			isLoad: true,
 			isEdit: true,
 			user,
-			fields: projectSetting.USER_FIELDS,
+      fields: fields,
 
 			formName: user.USER_NAME,
 			formMobile: user.USER_MOBILE,
@@ -51,8 +79,10 @@ Page({
       formWechat: user.USER_WECHAT,
       formEmail: user.USER_EMAIL,
       formPassword: user.USER_MINI_PASSWORD,
-      formConfirmPassword: user.USER_MINI_PASSWORD
-		})
+      formConfirmPassword: user.USER_MINI_PASSWORD,
+      userRole : user.USER_ROLE,
+      userApplicationStatus : user.USER_APPLICATION_STATUS
+    })
 	},
 
 	/**
@@ -103,12 +133,18 @@ Page({
 	},
 
 
-	bindSubmitTap: async function (e) {
+	bindSubmitTapUser: async function (e) {
 		try {
 
 			let data = this.data; 
-			// 数据校验 
-			data = validate.check(data, PassportBiz.CHECK_EDIT_FORM, this);
+      // 数据校验 
+      if (this.data.userApplicationStatus == 0) {
+        data = validate.check(data, PassportBiz.CHECK_USER_APPLICATION_FORM, this);
+      } 
+
+      if (this.data.userApplicationStatus == 3) {
+        data = validate.check(data, PassportBiz.CHECK_USER_EDIT_FORM, this);
+      }			
 			if (!data) return;
 
 			let forms = this.selectComponent("#cmpt-form").getForms(true);
@@ -117,7 +153,13 @@ Page({
 
 			let opts = {
 				title: '提交中'
-			}
+      }
+      data.userApplicationStatus = this.data.userApplicationStatus
+      data.userRole = this.data.userRole
+      if (data.userRole == 0) {
+        data.userApplicationStatus = 1
+      }
+
 			await cloudHelper.callCloudSumbit('passport/edit_base', data, opts).then(res => {
 				let callback = () => {
 					wx.reLaunch({ url: '../index/my_index' });
@@ -128,11 +170,106 @@ Page({
 			console.error(err);
 		}
   },
+
+  bindSubmitTapMember: async function (e) {
+    	try {
+			let data = this.data; 
+			// 数据校验 
+      if (this.data.userApplicationStatus == 0) {
+        data = validate.check(data, PassportBiz.CHECK_MEMBER_APPLICATION_FORM, this);
+      } 
+
+      if (this.data.userApplicationStatus == 3) {
+        data = validate.check(data, PassportBiz.CHECK_MEMBER_EDIT_FORM, this);
+      }	
+      if (!data) return;
+
+			let forms = this.selectComponent("#cmpt-form").getForms(true);
+			if (!forms) return;
+			data.forms = forms;
+
+			let opts = {
+				title: '提交中'
+      }
+      data.userApplicationStatus = this.data.userApplicationStatus
+      data.userRole = this.data.userRole
+      if (data.userRole == 0) {
+        data.userApplicationStatus = 2
+      }
+
+			await cloudHelper.callCloudSumbit('passport/edit_base', data, opts).then(res => {
+				let callback = () => {
+					wx.reLaunch({ url: '../index/my_index' });
+				}
+				pageHelper.showSuccToast('修改成功', 1500, callback);
+			});
+		} catch (err) {
+			console.error(err);
+		}
+  },
+
+  checkboxChange: function (e) {
+
+    const items = this.data.wishItems
+    const values = e.detail.value
+    let wishList = []
+    for (let i = 0, lenI = items.length; i < lenI; ++i) {
+      items[i].checked = false
+
+      for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (items[i].value === values[j]) {
+          items[i].checked = true
+          wishList.push(items[i])
+          break
+        }
+      }
+    }
+    this.setData({
+      wishList
+    })
+  },
+
+  checkResueceBoxChange: function (e) {
+
+    const items = this.data.resourceItems
+    const values = e.detail.value
+    let resourceList = []
+    for (let i = 0, lenI = items.length; i < lenI; ++i) {
+      items[i].checked = false
+
+      for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (items[i].value === values[j]) {
+          items[i].checked = true
+          resourceList.push(items[i])
+          break
+        }
+      }
+    }
+    this.setData({
+      resourceList
+    })
+  },
+
+  radioChange: function (e) {
+    let acceptAssign = false
+    if(e.detail.value == 'assign') {
+      acceptAssign = true
+    }
+    this.setData({
+      acceptAssign
+    })
+  },
   
   onTabClick(e) {
     let id = e.currentTarget.id;
+    let fields = projectSetting.USER_FIELDS
+    if (id == 1) {
+      fields = projectSetting.MEMBER_FIELDS
+    }
+
     this.setData({
       tabIndex: id,
+      fields: fields,
     })
   },
 })

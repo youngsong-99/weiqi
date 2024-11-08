@@ -68,6 +68,7 @@ Page({
       
     }
     let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
+
 		if (!user) {
 			this.setData({
 				user: null
