@@ -28,7 +28,8 @@
 			<view wx:if="{{user&&user.USER_STATUS!=9}}" class="item arrow" bindtap="url" data-url="../edit/my_edit">
 				<view class="content">
 					<text class="icon-edit my-icon-project"></text>
-					<text class="text-black">修改我的个人资料</text>
+					<text class="text-black" wx:if="{{user&&user.USER_ROLE!=0}}">修改我的个人资料</text>
+          <text class="text-black" wx:if="{{user&&user.USER_ROLE==0}}">会员申请</text>
 				</view>
 			</view>
 

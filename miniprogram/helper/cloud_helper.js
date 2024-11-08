@@ -98,8 +98,6 @@ function callCloud(route, params = {}, options) {
     if (user && user.id) 
     {
       token = user.id;
-      console.log("get userid")
-      console.log(token)
     }
 	}
 

@@ -30,11 +30,11 @@
 	</view>
 	<view wx:if="{{formWechatFocus}}" class="hint-desc error">{{formWechatFocus}}</view>
 
-  <!-- <view class="form-group">
+  <view class="form-group">
 		<view class="title must">邮箱</view>
 		<input type="text" placeholder="填写您的邮箱" placeholder-class="phc" model:value="{{formEmail}}" maxlength="30"></input>
 	</view>
-	<view wx:if="{{formEmailFocus}}" class="hint-desc error">{{formEmailFocus}}</view> -->
+	<view wx:if="{{formEmailFocus}}" class="hint-desc error">{{formEmailFocus}}</view>
 
   <view class="form-group">
 		<view class="title must">密码</view>
@@ -56,12 +56,30 @@
 
 <view class="form-box shadow-project card-project" wx:if="{{userApplicationStatus == 0}}">
   <view class="form-group">
-		<view class="title must">申请原因</view>
+		<view class="title must">意愿部门</view>
+	</view>
+  <view class="form-group">
+    <view class="page-section page-section-gap">
+      <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{wishItems}}" wx:key="id">
+            <view class="weui-cell__hd">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+              <label>{{item.name}}</label>
+            </view>
+
+          </label>
+        </checkbox-group>
+    </view>
+  </view>
+
+  <view class="form-group">
+		<view class="title must">拟加入协会及意愿部门的原因</view>
   </view>
   <view class="form-group">
-		<textarea placeholder="申请原因" model:value="{{formReason}}" maxlength="500"></textarea>
+		<textarea placeholder="加入部门原因" model:value="{{formReason}}" maxlength="500"></textarea>
 	</view>
 	<view wx:if="{{formReasonFocus}}" class="hint-desc error">{{formReasonFocus}}</view>
+
   <view class="form-group">
 		<view class="title must">你有哪些特长/资源，愿意帮助协会发展</view>
   </view>
@@ -77,6 +95,18 @@
         </checkbox-group>
 	</view>
 	<view wx:if="{{formResourceFocus}}" class="hint-desc error">{{formResourceFocus}}</view>
+
+  <view class="form-group">
+		<view class="title must">是否接受调剂</view>
+      <radio-group bindchange="radioChange">
+        <label class="radio">
+          <radio value="assign"/>  是
+        </label>
+        <label class="radio">
+          <radio value="notAssign"/>  否
+        </label>
+      </radio-group>
+	</view>
 
   <view class="form-group">
 		<view class="title">想问的问题/其他想说的</view>

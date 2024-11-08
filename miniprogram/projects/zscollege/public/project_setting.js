@@ -12,8 +12,16 @@ module.exports = { //zscollege大学社团
 	// 用户
 	USER_REG_CHECK: false,
 	USER_FIELDS: [
-		{ mark: 'sex', title: '性别', type: 'select', selectOptions: ['男', '女'], must: true },
-		{ mark: 'birth', title: '生日', type: 'date', must: true },
+    { mark: 'work', title: '院系专业', type: 'text', must: false },
+    { mark: 'school', title: '学校', type: 'text', must: true },
+    { mark: 'department', title: '学院', type: 'text', must: true },
+    { mark: 'major', title: '专业', type: 'text', must: true },
+    { mark: 'class', title: '年级', type: 'text', must: true },
+    { mark: 'company', title: '公司', type: 'text', must: false },
+    { mark: 'position', title: '职务', type: 'text', must: false },
+  ],
+
+  MEMBER_FIELDS: [
 		{ mark: 'address', title: '住址', type: 'text', must: false },
     { mark: 'work', title: '院系专业', type: 'text', must: false },
     { mark: 'location', title: '城市', type: 'text', must: true },

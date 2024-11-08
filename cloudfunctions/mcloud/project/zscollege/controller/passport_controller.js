@@ -8,6 +8,7 @@ const BaseProjectController = require('./base_project_controller.js');
 const PassportService = require('../service/passport_service.js');
 const contentCheck = require('../../../framework/validate/content_check.js');
 const dataUtil = require('../../../framework/utils/data_util.js');
+const UserModel = require('../model/user_model.js');
 
 class PassportController extends BaseProjectController {
 
@@ -109,16 +110,8 @@ async loginWithWechat() {
 	
 	/** 修改用户资料 */
 	async editBase() {
-		// 数据校验
-		let rules = {
-			name: 'must|string|min:1|max:30|name=昵称',
-			mobile: 'must|mobile|name=手机',
-      forms: 'array|name=表单',
-      status: 'int|default=1',
-      weChat: 'must|string|min:1|max:30|name=微信',
-      email:'must|string|min:1|max:30|name=邮箱',
-      password: 'must|string|min:8|max:30|name=密码'
-		};
+    // 数据校验
+    let rules = setEditRules(this)
 
 		// 取得数据
 		let input = this.validateData(rules);
@@ -146,9 +139,35 @@ async loginWithWechat() {
 		let service = new PassportService();
 		return await service.login(userID);
   }
-  
- 
 
 }
+
+function setEditRules(that) {
+  let rules = {
+    name: 'must|string|min:1|max:30|name=昵称',
+    mobile: 'must|mobile|name=手机',
+    forms: 'array|name=表单',
+    status: 'int|default=1',
+    weChat: 'must|string|min:1|max:30|name=微信',
+    password: 'must|string|min:8|max:30|name=密码',
+    userApplicationStatus: 'int',
+    userRole: 'int',
+  };
+
+  if (that._request.userApplicationStatus == UserModel.APPLICATION_STATUS.IN_PROGRESS_MEMBER) {
+    rules.wishList = 'wishList|must|array|name=意愿部门'
+    rules.email = 'email|must|string|min:1|max:30|name=邮箱'
+  }
+
+  if (that._request.userRole == UserModel.ROLE.MEMBER) {
+    rules.email = 'email|must|string|min:1|max:30|name=邮箱'
+  }
+
+  if (that._request.userRole == UserModel.ROLE.VISITOR) {
+    rules.reason = 'formReason|must|string|min:1|max:300|name=原因'
+    rules.resourceList = 'resourceList|must|array|name=可提供资源'
+  }
+  return rules
+ }
 
 module.exports = PassportController;

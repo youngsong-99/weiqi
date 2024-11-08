@@ -88,6 +88,13 @@ class PassportBiz extends BaseBiz {
 		let token = cacheHelper.get(constants.CACHE_TOKEN);
 		if (!token) return '';
 		return token.userWechatNickname || '';
+  }
+  
+   // 获取user role 
+	static getUserRole() {
+    let token = cacheHelper.get(constants.CACHE_TOKEN);
+		if (!token) return 0;
+		return token.userRole || 0;
 	}
 
 	static getStatus() {
@@ -160,7 +167,8 @@ class PassportBiz extends BaseBiz {
         } else if (result.data.token.userWechatNickname != '') {
           user.USER_NAME = result.data.token.userWechatNickname
         } 
-        
+
+        user.USER_ROLE = result.data.token.userRole
 				if (that) that.setData({
           isLogin: true,
           user: user
@@ -307,14 +315,47 @@ class PassportBiz extends BaseBiz {
 
 
 /** 编辑个人信息表单校验    */
-PassportBiz.CHECK_EDIT_FORM = {
+PassportBiz.CHECK_USER_APPLICATION_FORM = {
 	name: 'formName|must|string|min:1|max:30|name=昵称',
   mobile: 'formMobile|must|len:11|mobile|name=手机',
   weChat: 'formWechat|must|string|min:1|max:30|name=微信',
-  email:'formEmail|must|string|min:1|max:30|email|name=邮箱',
   forms: 'formForms|array',
   password: 'formPassword|must|string|min:8|max:30|password|name=密码',
   confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
+  reason:'formReason|must|string|min:1|max:300|name=原因',
+  resourceList: 'resourceList|must|array|name=可提供资源',
+};
+
+PassportBiz.CHECK_USER_EDIT_FORM = {
+	name: 'formName|must|string|min:1|max:30|name=昵称',
+  mobile: 'formMobile|must|len:11|mobile|name=手机',
+  weChat: 'formWechat|must|string|min:1|max:30|name=微信',
+  forms: 'formForms|array',
+  password: 'formPassword|must|string|min:8|max:30|password|name=密码',
+  confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
+};
+
+PassportBiz.CHECK_MEMBER_APPLICATION_FORM = {
+	name: 'formName|must|string|min:1|max:30|name=昵称',
+  mobile: 'formMobile|must|len:11|mobile|name=手机',
+  weChat: 'formWechat|must|string|min:1|max:30|name=微信',
+  forms: 'formForms|array',
+  password: 'formPassword|must|string|min:8|max:30|password|name=密码',
+  confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
+  reason:'formReason|must|string|min:1|max:300|name=原因',
+  email:'formEmail|must|string|min:1|max:30|email|name=邮箱',
+  wishList: 'wishList|must|array|name=意愿部门',
+  resourceList: 'resourceList|must|array|name=可提供资源',
+};
+
+PassportBiz.CHECK_MEMBER_EDIT_FORM = {
+	name: 'formName|must|string|min:1|max:30|name=昵称',
+  mobile: 'formMobile|must|len:11|mobile|name=手机',
+  weChat: 'formWechat|must|string|min:1|max:30|name=微信',
+  forms: 'formForms|array',
+  password: 'formPassword|must|string|min:8|max:30|password|name=密码',
+  confirmPassword: 'formConfirmPassword|must|string|confirmPassword|name=密码',
+  email:'formEmail|must|string|min:1|max:30|email|name=邮箱',
 };
 
 /** 注册表单校验    */

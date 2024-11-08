@@ -38,13 +38,16 @@ UserModel.DB_STRUCTURE = {
   USER_WECHAT: 'string|false|comment=用户微信',
   USER_EMAIL: 'string|false|comment=用户邮箱',
   USER_REASON: 'string|false|comment=入会原因',
-  USER_RESOURCE: 'string|false|comment=可提供资源',
-  USER_WISHLIST: 'array|true|default=[]',
+  USER_WISHLIST: 'array|true|default=[]|comment=意愿部门',
   USER_ACCEPTASSIGN: 'bool|false',
   USER_MINI_PASSWORD: 'string|false|comment=密码',
+  USER_RESOURCELIST: 'array|true|default=[]|comment=可提供资源',
 
   USER_PRIVACY: 'bool|false',
-  USER_WECHAT_NICKNAME: 'string|false|comment=用户微信昵称'
+  USER_WECHAT_NICKNAME: 'string|false|comment=用户微信昵称',
+
+  USER_ROLE: 'int|true|default=0|comment=用户角色 0=普通用户,1=会员,2=管理团队',
+  USER_APPLICATION_STATUS: 'int|false|default=0|comment=申请状态 0=未提交,1=会员审核中,2=管理团队审核中,3=会员已批准,4=已拒绝',
 }
 
 // 字段前缀
@@ -65,6 +68,20 @@ UserModel.STATUS_DESC = {
 	COMM: '正常',
 	UNCHECK: '未通过审核',
 	FORBID: '禁用'
+};
+
+UserModel.ROLE = {
+	VISITOR: 0,
+	USER: 1,
+	MEMBER: 2,
+};
+
+UserModel.APPLICATION_STATUS = {
+	UNUSE: 0,
+  IN_PROGRESS_USER: 1,
+  IN_PROGRESS_MEMBER: 2,
+  APPROVED: 3,
+  REVOKED: 4,
 };
 
 
