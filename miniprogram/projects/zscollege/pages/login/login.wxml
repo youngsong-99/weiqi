@@ -3,7 +3,7 @@
 
 <!--top area begin-->
 <view >
-  <image mode="widthFix" lazy-load src="../../images/my.png" />
+  <image mode="widthFix" lazy-load src="../../images/logo.png" />
 </view>
 
 
@@ -21,9 +21,8 @@
 <button bindtap="bindSubmitTap" class="btn-base btn-project shadow login-btn">登录</button>
 
 <view>
-<navigator url='../my/reg/my_reg'>用户注册</navigator>
+<button bindtap="getInfo" open-type="getUserInfo" class="btn-link">微信登陆</button>
 </view>
-<button bindtap="bindSubmitTap" class="btn-base btn-project shadow" open-type="getUserInfo" bindtap="getInfo">微信登陆</button>
 </view>
 
 <view style="height:100rpx"></view>

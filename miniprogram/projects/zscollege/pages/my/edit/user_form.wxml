@@ -82,7 +82,7 @@
 		<view class="title">想问的问题/其他想说的</view>
   </view>
   <view class="form-group">
-		<textarea placeholder="加入部门原因" model:value="{{formQuestion}}" maxlength="500"></textarea>
+		<textarea placeholder="想问的问题/其他想说的" model:value="{{formQuestion}}" maxlength="500"></textarea>
 	</view>
 	<view wx:if="{{formQuestionFocus}}" class="hint-desc error">{{formQuestionFocus}}</view>
   </view>
