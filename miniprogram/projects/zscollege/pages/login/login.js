@@ -122,7 +122,7 @@ Page({
       desc: '获取用户的登录信息',
       success:function(resinfo) {
         cloudHelper.callCloudSumbit('passport/login_with_wechat', resinfo, opts).then(result => {
-          console.log(result)
+          console.log(resinfo)
           if (result && helper.isDefined(result.data.token) && result.data.token) {
             if (!projectSetting.USER_REG_CHECK) 
             {
@@ -136,6 +136,7 @@ Page({
             else
             pageHelper.showSuccToast('登录成功', 1500, callback);
 
+            // wx.setStorageSync('user', resinfo)
             wx.reLaunch({
               url: '../my/index/my_index?nickname='+resinfo.userInfo.nickName+'&img='+resinfo.userInfo.avatarUrl,
             })

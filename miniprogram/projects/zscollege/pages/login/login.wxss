@@ -25,7 +25,7 @@ page {
 	width: 100%;
 	position: absolute;
 	top: 0;
-	left: 0;
+  left: 0;
 }
 
 .main .upside .user-bar {
@@ -228,4 +228,17 @@ page {
   background-color: red;
   margin-top: 100px;
   width: 260px;
+}
+
+.btn-link {
+  background-color:transparent;
+  border-style:none;  
+  border:transparent;
+  font-size: 14px;
+}
+
+.btn-link::after {
+  background-color:transparent;
+  border-style:none;  
+  border:transparent;
 }
