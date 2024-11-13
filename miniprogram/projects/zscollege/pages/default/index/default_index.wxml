@@ -1,6 +1,6 @@
 <view class="main">
 	<view class="up">
-		<image mode="aspectFill" src="../../../images/background.png" />
+		<image mode="aspectFill" src="../../../images/homepage_background.png" />
 	</view>
 	<view class="down">
 		<view class="menu card-project shadow-project">
