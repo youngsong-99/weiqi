@@ -1,6 +1,6 @@
 /**
  * Notes: 管理员管理
- * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY cclinux0730 (wechat)
+ * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY wenxiao song Weiqi (wechat)
  * Date: 2021-07-11 07:48:00 
  */
 
@@ -155,7 +155,7 @@ class AdminMgrService extends BaseProjectAdminService {
 
 	/** 删除管理员 */
 	async delMgr(id, myAdminId) {
-		this.AppError('该功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能正在加速开发中，未企将于近期开放，敬请期待');
 	}
 
 	/** 添加新的管理员 */
@@ -165,13 +165,13 @@ class AdminMgrService extends BaseProjectAdminService {
 		phone,
 		password
 	}) {
-		this.AppError('该功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能正在加速开发中，未企将于近期开放，敬请期待');
 
 	}
 
 	/** 修改状态 */
 	async statusMgr(id, status, myAdminId) {
-		this.AppError('该功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能正在加速开发中，未企将于近期开放，敬请期待');
 	} 
  
 
@@ -196,7 +196,7 @@ class AdminMgrService extends BaseProjectAdminService {
 		password
 	}) {
 
-		this.AppError('该功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能正在加速开发中，未企将于近期开放，敬请期待');
 	}
 
 	/** 修改自身密码 */
