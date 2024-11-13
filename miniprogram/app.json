@@ -11,7 +11,6 @@
 		"projects/zscollege/pages/news/index/news_index",
 		"projects/zscollege/pages/news/detail/news_detail",
 		"projects/zscollege/pages/news/cate1/news_cate1",
-		"projects/zscollege/pages/news/cate2/news_cate2",
 		"projects/zscollege/pages/admin/news/list/admin_news_list",
 		"projects/zscollege/pages/admin/news/add/admin_news_add",
 		"projects/zscollege/pages/admin/news/edit/admin_news_edit",
@@ -42,7 +41,6 @@
 		"projects/zscollege/pages/admin/enroll/export/admin_enroll_export",
 		"cmpts/public/form/form_set/field/form_set_field",
 		"cmpts/public/form/form_show/content/form_show_content",
-
 		"projects/zscollege/pages/login/login"
 	],
 	"window": {
