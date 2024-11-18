@@ -1,4 +1,5 @@
 <template name="newsIndexTpl">
+
 	<view wx:if="{{!_params}}" class="margin-top load loading text-l load-project"></view>
 	<block wx:else>
 

@@ -13,8 +13,11 @@
 					<view wx:else class="text-cut">{{user?'欢迎回来~~~':'马上登录，使用更多功能'}}</view>
 				</view>
 			</view>
-			<view class="avatar">
-				<image mode="aspectFit" src="../../../images/tabbar/my_cur.png" />
+			<view wx:if="{{user}}" class="tag medium radius bg-purple light">
+				<!-- <image mode="aspectFit" src="../../../images/tabbar/my_cur.png" /> -->
+        <text wx:if="{{user&&user.USER_ROLE==0}}">申请会员</text>
+        <text wx:if="{{user&&user.USER_ROLE==1}}">普通会员</text>
+        <text wx:if="{{user&&user.USER_ROLE==2}}">VIP</text>
 			</view>
 		</view>
 	</view>

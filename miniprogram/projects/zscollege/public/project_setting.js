@@ -37,8 +37,8 @@ module.exports = { //zscollege大学社团
 	NEWS_NAME: '资讯',
 	NEWS_CATE: [
 		{ id: 1, title: '社团公告', style: 'leftbig1' },
-		{ id: 2, title: '社团简介', style: 'leftbig2' },
-		{ id: 3, title: '社团风采', style: 'flow' },
+		{ id: 2, title: '俱乐部', style: 'leftbig2' },
+		{ id: 3, title: '俱乐部风采', style: 'flow' },
 
 	],
 	NEWS_FIELDS: [

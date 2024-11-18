@@ -395,3 +395,9 @@
 	font-size: 24rpx;
 	opacity: .8;
 }
+
+.text-title {
+  align-items:center; /*垂直居中 */
+  justify-content:center; /* 水平居中 */
+  display: flex;
+}

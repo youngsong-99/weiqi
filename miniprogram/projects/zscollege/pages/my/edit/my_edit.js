@@ -17,7 +17,7 @@ Page({
 		userRegCheck: projectSetting.USER_REG_CHECK,
     mobileCheck: setting.MOBILE_CHECK,
   
-    tabs: ['会员', '管理团队'],
+    tabs: ['普通会员', 'VIP/运营团队'],
     tabIndex: 0,
 
     wishItems: [
@@ -262,6 +262,7 @@ Page({
   
   onTabClick(e) {
     let id = e.currentTarget.id;
+    console.log(this.data)
     let fields = projectSetting.USER_FIELDS
     if (id == 1) {
       fields = projectSetting.MEMBER_FIELDS

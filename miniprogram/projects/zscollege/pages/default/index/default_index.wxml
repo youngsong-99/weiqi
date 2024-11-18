@@ -4,34 +4,17 @@
 	</view>
 	<view class="down">
 		<view class="menu card-project shadow-project">
-			<view bindtap="url" data-url="../../news/index/news_index?id=1" class="item">
-				<view class="item-inner">
-					<view class="img">
-						<image src="../../../images/menu/news1.png" />
-					</view>
-					<view class="title">社团公告</view>
-				</view>
-			</view>
+    <!--
+      <view bindtap="url" data-url="../../news/index/news_index?id=1" class="item">
+            <view class="item-inner">
+              <view class="img">
+                <image src="../../../images/menu/news1.png" />
+              </view>
+              <view class="title">社团公告</view>
+            </view>
+          </view>
 
-			<view bindtap="url" data-url="../../news/index/news_index?id=2" class="item">
-				<view class="item-inner">
-					<view class="img">
-						<image src="../../../images/menu/news2.png" />
-					</view>
-					<view class="title">社团简介</view>
-				</view>
-			</view>
-
-			<view bindtap="url" data-url="../../news/index/news_index?id=3" class="item">
-				<view class="item-inner">
-					<view class="img">
-						<image src="../../../images/menu/news3.png" />
-					</view>
-					<view class="title">社团风采</view>
-				</view>
-			</view>
-
-			<view bindtap="url" data-url="../../enroll/index/enroll_index?id=1" class="item">
+    <view bindtap="url" data-url="../../enroll/index/enroll_index?id=1" class="item">
 				<view class="item-inner">
 					<view class="img">
 						<image src="../../../images/menu/1.png" />
@@ -39,8 +22,8 @@
 					<view class="title">招新报名</view>
 				</view>
 			</view> 
-
-			<view bindtap="url" data-url="../../enroll/index/enroll_index?id=2" class="item">
+    
+    <view bindtap="url" data-url="../../enroll/index/enroll_index?id=2" class="item">
 				<view class="item-inner">
 					<view class="img">
 						<image src="../../../images/menu/2.png" />
@@ -49,6 +32,26 @@
 				</view>
 			</view> 
 
+    -->
+			
+
+			<view bindtap="url" data-url="../../news/index/news_index?id=2" class="item">
+				<view class="item-inner">
+					<view class="img">
+						<image src="../../../images/menu/news2.png" />
+					</view>
+					<view class="title">俱乐部</view>
+				</view>
+			</view>
+
+			<view bindtap="url" data-url="../../news/index/news_index?id=3" class="item">
+				<view class="item-inner">
+					<view class="img">
+						<image src="../../../images/menu/news3.png" />
+					</view>
+					<view class="title">俱乐部风采</view>
+				</view>
+			</view>
 
 			<view bindtap="url" data-url="../../enroll/index/enroll_index?id=3" class="item">
 				<view class="item-inner">

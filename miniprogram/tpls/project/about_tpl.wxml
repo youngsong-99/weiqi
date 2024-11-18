@@ -6,17 +6,30 @@
 	<view class="article-box margin-top-xs">
 		<!-- article content begin -->
 		<view class="article card-project shadow-project"> 
+    <text class="text-title">上海交通大学未来企业家协会</text>
+<text>
+上海交通大学未来企业家协会是由多专业背景的在校学生（本/硕/MBA/EMBA等）、老师和校友发起组建的跨学科创新型组织，在学校和学院支持下，以人才发展为核心，聚焦”前沿科技、金融投资、产业发展”，以研究带动价值创造，以创新引领社会进步。
 
-			<block wx:for="{{about}}" wx:key="key">
-				<view class="content" wx:if="{{item.type=='text'}}">
-					<text user-select>{{item.val}}</text>
-				</view>
+截至6月，目前协会有以下部门：
+1.OPT运营中心：负责协会整体运作/内外合作/品牌塑造/新媒体/团队管理/创新活动/高校联盟事务等（目前在建立协会信息化平台/资料网盘/武器库-活动平台/求职/项目储备库等）
 
-				<view class="pics" wx:if="{{item.type=='img'}}">
-					<image bindtap="url" data-type='img' data-url="{{item.val}}" show-menu-by-longpress="{{true}}" class="loading" mode='widthFix' lazy-load="true" src="{{item.val}}">
-					</image>
-				</view>
-			</block>
+2.FRC研究中心：负责行业研究/培训/课题研究/学术活动发布/其他学术活动等（目前拟联合多学院成立AI Lab和Robot Lab，正在建立跨学科实时资讯平台）
+
+3.FPC项目中心：负责企业合作/创新课题孵化/创投路演会/创业大赛等（已多次和金融机构/实体企业/开源组织举办活动，后续陆续增加频次）
+
+4.俱乐部：
+未来梦想家俱乐部 主题词：快乐 交流 创新 成长
+科技金融俱乐部 主题词：人才 科技 金融 产业
+
+5.项目：
+（1）对话企业家项目组：企业家采访/企业参访/企业类书籍读书会/资料梳理/企业家研究等
+
+6.协会成员：
+（1）普通群成员：邀请制/审核制（可加入行业交流大群）
+（2）VIP成员：邀请制/审核制+突出贡献（享受协会资源最高权限）
+（3）运营团队：邀请制/审核制+面试（享受协会资源最高权限）
+    </text>
+			
 			<!-- article content end -->
 
 
@@ -25,8 +38,8 @@
 		</view>
 		<!-- article content end -->
 
-
 	</view>
+
 
 	<view wx:if="{{accountInfo}}" class='text-center text-xs text-grey margin-top'>
 		v{{accountInfo.miniProgram.version}} {{accountInfo.miniProgram.envVersion}}

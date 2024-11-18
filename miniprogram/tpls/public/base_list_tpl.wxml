@@ -71,7 +71,7 @@
 
 			<!--左大图 Begin-->
 			<view wx:elif="{{listMode=='leftbig'||listMode=='leftbig1'||listMode=='leftbig2' ||listMode=='leftbig3'}}" class="item card-project shadow-project item-{{listMode}}" bindtap="url" data-url="../../{{item.type}}/detail/{{item.type}}_detail?id={{item.id}}">
-				<image mode="aspectFill" lazy-load="{{true}}" class="leftbig-left loading" src="{{item.pic}}">
+				<image mode="aspectFill" lazy-load="{{true}}" class="leftbig-left loading club-img-fit" src="{{item.pic}}">
 				</image>
 				<view class="leftbig-right">
 					<view class="leftbig-title content-cut-one">{{item.title}}</view>
