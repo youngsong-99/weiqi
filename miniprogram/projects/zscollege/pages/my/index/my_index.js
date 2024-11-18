@@ -29,7 +29,7 @@ Page({
         user.USER_NAME = wechat;
       }
 
-			this.setData({ user });
+      this.setData({ user });
     }
 		ProjectBiz.initPage(this);
 	},

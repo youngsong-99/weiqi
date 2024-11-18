@@ -21,7 +21,7 @@ class BaseProjectService extends BaseService {
 		const COLLECTIONS = ['setup', 'admin', 'log', 'news', 'enroll', 'enroll_join', 'fav', 'user'];
 		const CONST_PIC = '/images/cover.gif';
 
-		const NEWS_CATE = '1=社团公告,2=社团简介,3=社团风采';
+		const NEWS_CATE = '1=社团公告,2=社团简介,3=俱乐部风采';
 		const ENROLL_CATE = '1=招新报名,2=社团培训报名,3=社团活动报名';
 
 
