@@ -1,9 +1,9 @@
 <view class="main {{skin.IS_SUB?'sub-margin-bottom':''}}">
 
 	<!--top area begin-->
-	<view class="upside upside-shadow" bindtap="url" data-url="{{user?'../edit/my_edit':'../../login/login'}}">
+	<view class="upside upside-shadow" >
 		<image mode="widthFix" lazy-load class="upImg loading" src="../../../images/my.png" />
-		<view class="user-bar">
+		<view class="user-bar" bindtap="url" data-url="{{!user?'../../login/login':''}}">
 			<view class="detail">
 				<view class="name text-cut">{{user?user.USER_NAME:'未登录'}}</view>
 				<view class="desc">
