@@ -20,9 +20,9 @@
 <!--down area end-->
 <button bindtap="bindSubmitTap" class="btn-base btn-project shadow login-btn">登录</button>
 
-<view>
+<!-- <view>
 <button bindtap="getInfo" open-type="getUserInfo" class="btn-link">微信登陆</button>
-</view>
+</view> -->
 </view>
 
 <view style="height:100rpx"></view>
