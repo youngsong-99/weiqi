@@ -150,7 +150,7 @@ Page({
 			let forms = this.selectComponent("#cmpt-form").getForms(true);
 			if (!forms) return;
 			data.forms = forms;
-
+      console.log(11111)
 			let opts = {
 				title: '提交中'
       }
@@ -173,12 +173,13 @@ Page({
 
   bindSubmitTapMember: async function (e) {
     	try {
-			let data = this.data; 
+      let data = this.data; 
+
 			// 数据校验 
       if (this.data.userApplicationStatus == 0) {
         data = validate.check(data, PassportBiz.CHECK_MEMBER_APPLICATION_FORM, this);
       } 
-
+      
       if (this.data.userApplicationStatus == 3) {
         data = validate.check(data, PassportBiz.CHECK_MEMBER_EDIT_FORM, this);
       }	

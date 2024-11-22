@@ -15,7 +15,7 @@
 
 	<view class="form-group">
 		<view class="title must">手机</view>
-		<input wx:if="{{!mobileCheck}}" placeholder="填写您的手机号码" placeholder-class="phc" model:value="{{formMobile}}" maxlength="11"></input>
+		<input wx:if="{{!mobileCheck}}" placeholder="填写您的手机号码" placeholder-class="phc" model:value="{{formMobile}}" maxlength="11" disabled="{{userApplicationStatus == 3}}"></input>
 
 		<block wx:else>
 			<view class="mobile">{{formMobile||'未填写'}}</view>

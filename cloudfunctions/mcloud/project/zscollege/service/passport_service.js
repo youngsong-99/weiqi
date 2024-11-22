@@ -76,7 +76,6 @@ class PassportService extends BaseProjectService {
 
 		if (cnt > 0)
 			return await this.login(userId);
-    console.log(wechatNickName)
 		// 入库
 		let data = {
 			USER_MINI_OPENID: userId,
